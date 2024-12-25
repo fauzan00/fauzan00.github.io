@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grouped Cards with Dark Background</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4CAF50',
+                        secondary: '#FF5722',
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="bg-gray-900 font-sans text-gray-200">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-green-500 to-blue-500 text-white py-10">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-extrabold">Code Guide Categories</h1>
+            <p class="text-lg mt-4">Explore resources grouped by categories to enhance your skills.</p>
+        </div>
+    </header>
+
+    <!-- Breadcrumb with Modern Style -->
+    <nav class="container mx-auto px-4 py-6">
+        <div class="flex items-center space-x-4 text-gray-300 text-sm">
+            <a href="#" class="hover:text-green-400 transition-colors duration-300">Home</a>
+            <span class="text-gray-500">/</span>
+            <a href="#" class="hover:text-green-400 transition-colors duration-300">Code Guide Categories</a>
+            <span class="text-gray-500">/</span>
+            <span class="text-gray-400">Programming</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-10">
+        <!-- Programming Group -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-green-400 mb-2">Programming</h2>
+            <div class="w-24 h-1 bg-green-400 mb-6"></div> <!-- Separator -->
+            <div class="space-y-6">
+                <!-- Card 1 -->
+                <a href="#javascript" class="flex items-center bg-gray-800 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center justify-center bg-primary text-white w-12 h-12 rounded-full mr-4 text-lg font-bold">1</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-200">JavaScript Basics</h3>
+                        <p class="text-gray-400 mt-2">Learn the fundamentals of JavaScript programming.</p>
+                    </div>
+                </a>
+                <!-- Card 2 -->
+                <a href="#python" class="flex items-center bg-gray-800 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center justify-center bg-primary text-white w-12 h-12 rounded-full mr-4 text-lg font-bold">2</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-200">Python for Beginners</h3>
+                        <p class="text-gray-400 mt-2">Start your Python journey with beginner-friendly resources.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- MySQL Group -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-green-400 mb-2">MySQL</h2>
+            <div class="w-24 h-1 bg-green-400 mb-6"></div> <!-- Separator -->
+            <div class="space-y-6">
+                <!-- Card 1 -->
+                <a href="#mysql-intro" class="flex items-center bg-gray-800 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center justify-center bg-primary text-white w-12 h-12 rounded-full mr-4 text-lg font-bold">1</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-200">Introduction to MySQL</h3>
+                        <p class="text-gray-400 mt-2">Understand the basics of MySQL databases and queries.</p>
+                    </div>
+                </a>
+                <!-- Card 2 -->
+                <a href="#advanced-mysql" class="flex items-center bg-gray-800 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center justify-center bg-primary text-white w-12 h-12 rounded-full mr-4 text-lg font-bold">2</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-200">Advanced MySQL Queries</h3>
+                        <p class="text-gray-400 mt-2">Learn advanced techniques to optimize your MySQL queries.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Other Group -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-green-400 mb-2">Other Topics</h2>
+            <div class="w-24 h-1 bg-green-400 mb-6"></div> <!-- Separator -->
+            <div class="space-y-6">
+                <!-- Card 1 -->
+                <a href="#version-control" class="flex items-center bg-gray-800 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center justify-center bg-primary text-white w-12 h-12 rounded-full mr-4 text-lg font-bold">1</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-200">Version Control with Git</h3>
+                        <p class="text-gray-400 mt-2">Master version control using Git and GitHub.</p>
+                    </div>
+                </a>
+                <!-- Card 2 -->
+                <a href="#api-design" class="flex items-center bg-gray-800 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center justify-center bg-primary text-white w-12 h-12 rounded-full mr-4 text-lg font-bold">2</div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-200">API Design Best Practices</h3>
+                        <p class="text-gray-400 mt-2">Learn how to design efficient and scalable APIs.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <!-- <footer class="bg-gradient-to-r from-green-500 to-blue-500 text-white text-center py-6">
+        <p class="text-lg">&copy; 2024 Code Guide. All rights reserved.</p>
+    </footer> -->
+
+    <!-- <footer class="bg-gray-800 text-white text-center py-4">
+        <p>&copy;  fauzan00 (My Notes)e. All rights reserved.</p>
+    </footer> -->
+</body>
+</html>

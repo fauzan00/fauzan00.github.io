@@ -2,6 +2,100 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Code Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4CAF50',
+                        secondary: '#FF5722',
+                    },
+                },
+            },
+        };
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-r from-gray-900 via-black to-gray-900 font-sans text-white">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-green-500 to-blue-500 text-white py-10">
+        <div class="container mx-auto text-center">
+            <h1 class="text-5xl font-extrabold">Welcome to My Notes</h1>
+            <p class="text-xl mt-4">Explore practices to level up your skills.</p>
+        </div>      
+    </header>
+
+    <!-- Profile Greeting Section -->
+    <section class="container mx-auto px-4 py-16 flex justify-center items-center">
+        <div class="bg-gray-800 rounded-xl p-8 max-w-lg w-full shadow-xl transform hover:scale-105 transition-all duration-300">
+            <div class="flex flex-col items-center text-center">
+                <img src="./image/avatar.png" alt="Profile Image" class="w-40 h-40 rounded-full border-4 border-primary mb-6">
+                <h2 class="text-3xl font-bold text-white mb-2">Hello, Everyone!</h2>
+                <p class="text-gray-400 mb-4">Welcome back! We’re glad to have you here. Check out some of the latest content to continue your learning journey.</p>
+                <!-- <a href="#explore" class="bg-primary text-white px-6 py-2 rounded-full text-lg hover:bg-green-700 transition-all">Explore Now</a> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <main class="container mx-auto px-4 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <a href="#introduction" class="block bg-gray-800 shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+                <div class="p-6 text-center">
+                    <div class="text-primary mb-4">
+                        <i class="fas fa-book w-12 h-12 mx-auto"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2">Blog</h2>
+                    <p class="text-gray-400">Article about my journey and exploration</p>
+                </div>
+            </a>
+
+            <!-- Card 2 -->
+            <a href="#examples" class="block bg-gray-800 shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+                <div class="p-6 text-center">
+                    <div class="text-primary mb-4">
+                        <i class="fas fa-code w-12 h-12 mx-auto"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2">Examples</h2>
+                    <p class="text-gray-400">Explore practical code snippets to enhance your knowledge.</p>
+                </div>
+            </a>
+
+            <!-- Card 3 -->
+            <a href="#tips" class="block bg-gray-800 shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+                <div class="p-6 text-center">
+                    <div class="text-primary mb-4">
+                        <i class="fas fa-lightbulb w-12 h-12 mx-auto"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2">Tips</h2>
+                    <p class="text-gray-400">Discover useful tips for configuration.</p>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <!-- <footer class="bg-gray-800 text-white text-center py-4">
+        <p class="text-lg">&copy; 2024 My Notes. All rights reserved.</p>
+    </footer> -->
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -15,7 +109,6 @@
           <div class="container-fluid">
             <a class="navbar-brand" href="/index.html">
                 <img src="./library/portfolio.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                <!-- <i class="bi bi-bootstrap-fill"></i> -->
                 Portfolio
             </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,4 +172,4 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>
-</html>
+</html> -->
