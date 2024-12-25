@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beautiful Code Guide</title>
+    <title>My Notes</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -19,7 +20,19 @@
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-gradient-to-r from-gray-900 via-black to-gray-900 font-sans text-white">
+<body class="bg-gradient-to-r from-sky-900 via-black to-gray-900 font-sans text-white">
+    <!-- Navigation Bar -->
+    <nav class="bg-gradient-to-r from-sky-900 via-black to-gray-900  text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold">fauzan00</h1>
+            <!-- <ul class="flex space-x-6">
+                <li><a href="#" class="hover:text-indigo-400 transition">Home</a></li>
+                <li><a href="#" class="hover:text-indigo-400 transition">About</a></li>
+                <li><a href="#" class="hover:text-indigo-400 transition">Contact</a></li>
+            </ul> -->
+        </div>
+    </nav>
+
     <!-- Header -->
     <header class="bg-gradient-to-r from-green-500 to-blue-500 text-white py-10">
         <div class="container mx-auto text-center">
@@ -44,7 +57,7 @@
     <main class="container mx-auto px-4 py-16">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Card 1 -->
-            <a href="#introduction" class="block bg-gray-800 shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+            <!-- <a href="#introduction" class="block bg-gray-800 shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
                 <div class="p-6 text-center">
                     <div class="text-primary mb-4">
                         <i class="fas fa-book w-12 h-12 mx-auto"></i>
@@ -52,21 +65,23 @@
                     <h2 class="text-2xl font-bold text-white mb-2">Blog</h2>
                     <p class="text-gray-400">Article about my journey and exploration</p>
                 </div>
-            </a>
+            </a> -->
 
-            <!-- Card 2 -->
-            <a href="#examples" class="block bg-gray-800 shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+            <div class="block bg-gray-800 shadow-lg rounded-xl overflow-hidden opacity-50 cursor-not-allowed relative">
                 <div class="p-6 text-center">
                     <div class="text-primary mb-4">
-                        <i class="fas fa-code w-12 h-12 mx-auto"></i>
+                        <i class="fas fa-book w-12 h-12 mx-auto"></i>
                     </div>
-                    <h2 class="text-2xl font-bold text-white mb-2">Examples</h2>
-                    <p class="text-gray-400">Explore practical code snippets to enhance your knowledge.</p>
+                    <h2 class="text-2xl font-bold text-gray-500 mb-2">Blog</h2>
+                    <h2 class="text-xl font-bold text-gray-500 mb-2">(Unavailable)</h2>
+                    <p class="text-gray-500">Article about my journey and exploration</p>
                 </div>
-            </a>
+            </div>
+            
+
 
             <!-- Card 3 -->
-            <a href="#tips" class="block bg-gray-800 shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+            <a href="/pages/tips/tips_list.html" class="block bg-gray-800 shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
                 <div class="p-6 text-center">
                     <div class="text-primary mb-4">
                         <i class="fas fa-lightbulb w-12 h-12 mx-auto"></i>
@@ -75,6 +90,29 @@
                     <p class="text-gray-400">Discover useful tips for configuration.</p>
                 </div>
             </a>
+
+            <!-- Card 3 -->
+            <!-- <a href="#examples" class="block bg-gray-800 shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+                <div class="p-6 text-center">
+                    <div class="text-primary mb-4">
+                        <i class="fas fa-code w-12 h-12 mx-auto"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2">Examples</h2>
+                    <p class="text-gray-400">Explore practical code snippets to enhance your knowledge.</p>
+                </div>
+            </a> -->
+
+            <div class="block bg-gray-800 shadow-lg rounded-xl overflow-hidden opacity-50 cursor-not-allowed relative">
+                <div class="p-6 text-center">
+                    <div class="text-primary mb-4">
+                        <i class="fas fa-code w-12 h-12 mx-auto"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-500 mb-2">Examples</h2>
+                    <h2 class="text-xl font-bold text-gray-500 mb-2">(Unavailable)</h2>
+                    <p class="text-gray-500">Explore practical code snippets to enhance your knowledge.</p>
+                </div>
+            </div>
+            
         </div>
     </main>
 
