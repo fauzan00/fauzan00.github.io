@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fuwari</title><description>Demo Site</description><link>https://fuwari.vercel.app/</link><language>en</language><item><title>Markdown Extended Features</title><link>https://fuwari.vercel.app/posts/markdown-extended/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/markdown-extended/</guid><description>Read more about Markdown features in Fuwari</description><pubDate>Wed, 01 May 2024 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;GitHub Repository Cards&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fauzan00</title><description>Demo Site</description><link>https://fuwari.vercel.app/</link><language>en</language><item><title>CJK edge case for test sss</title><link>https://fuwari.vercel.app/posts/cjk-test/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/cjk-test/</guid><description>CJK Test</description><pubDate>Sun, 04 May 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;CJK Test jjjj&lt;/p&gt;
+</content:encoded></item><item><title>Markdown Extended Features</title><link>https://fuwari.vercel.app/posts/markdown-extended/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/markdown-extended/</guid><description>Read more about Markdown features in Fuwari</description><pubDate>Wed, 01 May 2024 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;GitHub Repository Cards&lt;/h2&gt;
 &lt;p&gt;You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API.&lt;/p&gt;
 &lt;p&gt;::github{repo=&quot;Fabrizz/MMM-OnSpotify&quot;}&lt;/p&gt;
 &lt;p&gt;Create a GitHub repository card with the code &lt;code&gt;::github{repo=&quot;&amp;lt;owner&amp;gt;/&amp;lt;repo&amp;gt;&quot;}&lt;/code&gt;.&lt;/p&gt;
@@ -253,4 +254,14 @@ published: 2023-10-19
 &lt;p&gt;&amp;lt;iframe width=&quot;100%&quot; height=&quot;468&quot; src=&quot;https://www.youtube.com/embed/5gIf0_xpFPI?si=N1WTorLKL0uwLsU_&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; allowfullscreen&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/p&gt;
 &lt;h2&gt;Bilibili&lt;/h2&gt;
 &lt;p&gt;&amp;lt;iframe width=&quot;100%&quot; height=&quot;468&quot; src=&quot;//player.bilibili.com/player.html?bvid=BV1fK4y1s7Qf&amp;amp;p=1&quot; scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot;&amp;gt; &amp;lt;/iframe&amp;gt;&lt;/p&gt;
+</content:encoded></item><item><title>Draft Example</title><link>https://fuwari.vercel.app/posts/draft/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/draft/</guid><pubDate>Fri, 01 Jul 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;This Article is a Draft&lt;/h1&gt;
+&lt;p&gt;This article is currently in a draft state and is not published. Therefore, it will not be visible to the general audience. The content is still a work in progress and may require further editing and review.&lt;/p&gt;
+&lt;p&gt;When the article is ready for publication, you can update the &quot;draft&quot; field to &quot;false&quot; in the Frontmatter:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;---
+title: Draft Example
+published: 2024-01-11T04:40:26.381Z
+tags: [Markdown, Blogging, Demo]
+category: Examples
+draft: false
+---&lt;/code&gt;&lt;/pre&gt;
 </content:encoded></item></channel></rss>
