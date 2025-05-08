@@ -1,4 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fauzan00</title><description>Demo Site</description><link>https://fuwari.vercel.app/</link><language>en</language><item><title>CJK edge case for test sss</title><link>https://fuwari.vercel.app/posts/cjk-test/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/cjk-test/</guid><description>CJK Test</description><pubDate>Sun, 04 May 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;CJK Test jjjj&lt;/p&gt;
+</content:encoded></item><item><title>Mysql Replication</title><link>https://fuwari.vercel.app/posts/mysql-replication/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/mysql-replication/</guid><description>Mysql Replication on how make backup database server</description><pubDate>Sat, 22 Mar 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Introduction to MySQL Replication (Master-Slave)&lt;/h1&gt;
+&lt;p&gt;have the basic knowledge replication mysql by own simulation in virtualbox&lt;/p&gt;
+&lt;p&gt;&amp;lt;!-- &amp;lt;/div&amp;gt; --&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div class=&quot;separator&quot;&amp;gt;&amp;lt;/div&amp;gt;
+In this article, we will walk through the steps of creating a simple database replication using virtualbox simulation.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Two Server linux
+├── Database Master
+└── Database Slave
+
+Internet Connection for download
+├── 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;h1&gt;Step 1: Server Configuration&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div class=&quot;separator&quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;Step 1.1 — Install two Ubuntu OS on Virtualbox&lt;/h2&gt;
+&lt;p&gt;&amp;lt;div class=&quot;separator&quot;&amp;gt;&amp;lt;/div&amp;gt;
+you can setup as below:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image/db_replication1.png&quot; alt=&quot;db_replication1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;center&amp;gt;
+&amp;lt;i&amp;gt; Master Slave Diagram Configuration.&amp;lt;/i&amp;gt;
+&amp;lt;/center&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;div class=&quot;credentials-box&quot;&amp;gt;
+&amp;lt;div class=&quot;hierarchy-list&quot;&amp;gt;&lt;/p&gt;
+&lt;h3&gt;Database Credentials&lt;/h3&gt;
+&lt;h4&gt;🔑 DB Master&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Username:&lt;/strong&gt; &lt;code&gt;ubuntu1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Password:&lt;/strong&gt; &lt;code&gt;abc123&lt;/code&gt; &lt;em&gt;(change this in production!)&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;🔄 DB Slave (Replica)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Username:&lt;/strong&gt; &lt;code&gt;ubuntu2&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Password:&lt;/strong&gt; &lt;code&gt;abc123&lt;/code&gt; &lt;em&gt;(use unique passwords!)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image/db_replication2.png&quot; alt=&quot;db_replication2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image/db_replication3.png&quot; alt=&quot;db_replication3&quot; /&gt;&lt;/p&gt;
+&lt;h1&gt;Step 2: MySQL&lt;/h1&gt;
+&lt;h2&gt;Step 2.1 — Installing MySQL (Master &amp;amp; Slave Server)&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;# update server package
+sudo apt update
+# install mysql package
+sudo apt install mysql-server
+# start the mysql service
+sudo systemctl start mysql.service
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 2.2 — Configure MySQL User (Master &amp;amp; Slave Server)&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;# Command
+$ sudo mysql  //enter into mysql
+
+# IN MYSQL Configure User access by password
+mysql&amp;gt; ALTER USER &apos;root&apos;@&apos;localhost&apos; IDENTIFIED WITH mysql_native_password BY &apos;password&apos;;  //update access root mysql
+mysql&amp;gt; exit //exit
+
+# Re-enter MYSQL User mysql by password
+$ mysql -u root -p  //enter into mysql
+
+# by default mysql user use auth_socket:
+# for revert change the access as default run command in mysql as below:
+mysql&amp;gt; ALTER USER &apos;root&apos;@&apos;localhost&apos; IDENTIFIED WITH auth_socket;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 2.3 — Configure MySQL Source&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;// Command
+$ sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf  //change the mysql config
+
+//In mysqld.cnf change as below:
+bind-address = 0.0.0.0 //source_server_ip
+server-id = 1 // for server master, then set 2 if Slave
+log_bin = /var/log/mysql/mysql-bin.log
+# binlog_do_db = include_database_name //open if want to replicate db
+# binlog_ignore_db = db_to_ignore // /open if remove replicate db
+relay-log = /var/log/mysql/mysql-relay-bin.log //open for slave only
+
+Ctr+x then y.
+
+//Restart MYSQL
+$ sudo systemctl restart mysql
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 2.4 — Configure MySQL Master&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;# Command
+$ mysql -u root -p  //enter into mysql
+
+# IN MYSQL Configure Replica User access by password
+mysql&amp;gt; CREATE USER &apos;replica&apos;@&apos;*&apos; IDENTIFIED WITH mysql_native_password BY &apos;Replica&apos;; //create access replica mysql
+mysql&amp;gt; GRANT REPLICATION SLAVE ON *.* TO &apos;replica&apos;@&apos;192.168.56.102&apos;;
+mysql&amp;gt; FLUSH PRIVILEGES;
+mysql&amp;gt; exit //exit
+
+# Re-enter MYSQL User mysql by password
+$ mysql -u replica -p  //enter into mysql to test
+
+mysql&amp;gt; SHOW MASTER STATUS;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 2.4 — Configure MySQL Slave&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;# Command
+$ mysql -u root -p  //enter into mysql
+
+# IN MYSQL Configure Replica Source
+mysql&amp;gt; CHANGE REPLICATION SOURCE TO
+mysql&amp;gt; SOURCE_HOST=&apos;192.168.1.1&apos;,
+mysql&amp;gt; SOURCE_USER=&apos;replica&apos;,
+mysql&amp;gt; SOURCE_PASSWORD=&apos;Replica&apos;,
+mysql&amp;gt; SOURCE_LOG_FILE=&apos;mysql-bin.000001&apos;,
+mysql&amp;gt; SOURCE_LOG_POS=899;
+mysql&amp;gt; exit //exit
+
+// Start Replica in slave
+mysql&amp;gt; START REPLICA;
+mysql&amp;gt; SHOW REPLICA STATUS\G;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 3.1 — Test write the recod data in Master &amp;amp; show in Slave&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;================
+//MASTER DB
+================
+# Command
+$ mysql -u root -p  //enter into mysql
+
+mysql&amp;gt; create database test;
+mysql&amp;gt; show databases;
+
+================
+//SLAVE DB
+================
+# Command
+$ mysql -u root -p  //enter into mysql
+
+mysql&amp;gt; show databases;
+mysql&amp;gt; SHOW REPLICA STATUS\G;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;Master-slave replication only single directional write. Only master
+database can write while slave only can read. It is important for us
+alert and grab this concept precisely.Also if you want replicate the
+master that already have data and db,make sure you copy the db and dump
+into replica db first.&lt;/p&gt;
+&lt;p&gt;you can use method to copy db as below:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SCP METHOD:
+├── scp &quot;source&quot; &quot;destination&quot; &amp;lt;br /&amp;gt;
+└── scp db.sql sammy@replica_server_ip:/tmp/
+
+MYSQL DUMP METHOD:
+├── mysqldump -u &quot;username&quot; -p &quot;database&quot; &quot;table&quot; &amp;gt; &quot;destination_file.sql&quot; &amp;lt;br /&amp;gt;
+└──  mysqldump -u test -p db_master &amp;gt; &quot;home/user1.sql&quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;p&gt;Reference web link:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Install Mysql on Ubuntu 20.04 &amp;lt;a target=&quot;_blank&quot;
+href=&quot;https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04&quot;&amp;gt;(link)&amp;lt;/a&amp;gt;&lt;/li&gt;
+&lt;li&gt;Setup Mysql Replication &amp;lt;a target=&quot;_blank&quot;
+href=&quot;https://www.digitalocean.com/community/tutorials/how-to-set-up-replication-in-mysql&quot;&amp;gt;(link)&amp;lt;/a&amp;gt;&lt;/li&gt;
+&lt;/ol&gt;
 </content:encoded></item><item><title>Markdown Extended Features</title><link>https://fuwari.vercel.app/posts/markdown-extended/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/markdown-extended/</guid><description>Read more about Markdown features in Fuwari</description><pubDate>Wed, 01 May 2024 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;GitHub Repository Cards&lt;/h2&gt;
 &lt;p&gt;You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API.&lt;/p&gt;
 &lt;p&gt;::github{repo=&quot;Fabrizz/MMM-OnSpotify&quot;}&lt;/p&gt;
