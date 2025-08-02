@@ -1,4 +1,352 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fauzan00</title><description>Demo Site</description><link>https://fuwari.vercel.app/</link><language>en</language><item><title>Mysql Replication</title><link>https://fuwari.vercel.app/posts/mysql-replication/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/mysql-replication/</guid><description>Mysql Replication on how make backup database server</description><pubDate>Sat, 22 Mar 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Introduction to MySQL Replication (Master-Slave)&lt;/h1&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fauzan00</title><description>Demo Site</description><link>https://fuwari.vercel.app/</link><language>en</language><item><title>Vs Code Extension</title><link>https://fuwari.vercel.app/posts/plugin/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/plugin/</guid><description>Vs Code Extension notes</description><pubDate>Sat, 22 Mar 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&amp;lt;!-- | header | header | header |
+| ------ | :----: | -----: |
+| a      |   b    |      c |
+| 1      |   2    |      3 |
+| foo    |  bar   |    baz | --&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;!-- | header | header | header |
+| ------ | :----: | -----: |
+| #1     |   b    |      c |
+| 1      |   2    |      3 |
+| foo    |  bar   |    baz | --&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div class=&quot;separator&quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h5&gt;(Published on March 22, 2025)&lt;/h5&gt;
+&lt;p&gt;&amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;p&gt;In this article, we will walk through the my extension that help me a lot in written code more efficiency.&lt;/p&gt;
+&lt;p&gt;&amp;lt;!-- &amp;lt;div class=&quot;credentials-box&quot;&amp;gt;
+&amp;lt;div class=&quot;hierarchy-list&quot;&amp;gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Two Server linux&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Database Master&lt;/li&gt;
+&lt;li&gt;Database Slave&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Internet Connection for download&lt;/p&gt;
+&lt;p&gt;&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;lt;/div&amp;gt; --&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;!-- &lt;img src=&quot;/image/db_replication3.png&quot; alt=&quot;db_replication3&quot; /&gt; --&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;br&amp;gt;
+&amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;!-- &lt;a href=&quot;https://formulahendry.gallerycdn.vsassets.io/extensions/formulahendry/auto-close-tag/0.5.15/1702959502562/Microsoft.VisualStudio.Services.Icons.Default&quot;&gt;&lt;strong&gt;laravel&lt;/strong&gt;&lt;/a&gt; --&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;!-- &lt;img src=&quot;https://formulahendry.gallerycdn.vsassets.io/extensions/formulahendry/auto-close-tag/0.5.15/1702959502562/Microsoft.VisualStudio.Services.Icons.Default&quot; alt=&quot;GitHub Logo&quot; /&gt; --&amp;gt;&lt;/p&gt;
+&lt;h1&gt;VS CODE Extension&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div class=&quot;separator&quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;div class=&quot;table-container&quot;&amp;gt;
+&amp;lt;table&amp;gt;
+&amp;lt;thead&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;th&amp;gt;No&amp;lt;/th&amp;gt;
+&amp;lt;th&amp;gt;Tips&amp;lt;/th&amp;gt;
+&amp;lt;th&amp;gt;Description&amp;lt;/th&amp;gt;
+&amp;lt;!-- &amp;lt;th class=&quot;text-center&quot;&amp;gt;Status&amp;lt;/th&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;/thead&amp;gt;
+&amp;lt;tbody&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#1&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://formulahendry.gallerycdn.vsassets.io/extensions/formulahendry/auto-close-tag/0.5.15/1702959502562/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+Auto Close Tag
+&amp;lt;br&amp;gt;
+(Jun Han)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-active&quot;&amp;gt;Active&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#2&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://formulahendry.gallerycdn.vsassets.io/extensions/formulahendry/auto-rename-tag/0.1.10/1644319230173/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+Auto Rename Tag
+&amp;lt;br&amp;gt;
+(Jun Han)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#3&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://eamodio.gallerycdn.vsassets.io/extensions/eamodio/gitlens/2024.12.2404/1735031340469/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+GitLens
+&amp;lt;br&amp;gt;
+(GitKraken)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#4&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://ecmel.gallerycdn.vsassets.io/extensions/ecmel/vscode-html-css/2.0.11/1730921970372/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+HTML CSS Support
+&amp;lt;br&amp;gt;
+(Ecmel)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#5&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://shufo.gallerycdn.vsassets.io/extensions/shufo/vscode-blade-formatter/0.24.4/1734887442034/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+Laravel blade formatter
+&amp;lt;br&amp;gt;
+(Shuhei Hayashibara)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#6&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://onecentlin.gallerycdn.vsassets.io/extensions/onecentlin/laravel5-snippets/1.18.0/1710409025279/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+Laravel Snippet
+&amp;lt;br&amp;gt;
+(Winnie Lin)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#7&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://naoray.gallerycdn.vsassets.io/extensions/naoray/laravel-goto-components/1.2.0/1635421420328/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+laravel-goto-components
+&amp;lt;br&amp;gt;
+(naoray)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#8&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://pgl.gallerycdn.vsassets.io/extensions/pgl/laravel-jump-controller/0.0.33/1681960122487/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+laravel-jump-controller
+&amp;lt;br&amp;gt;
+(pgl)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#9&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://open-southeners.gallerycdn.vsassets.io/extensions/open-southeners/laravel-pint/1.2.1/1720174668351/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+Laravel Pint
+&amp;lt;br&amp;gt;
+(open-southeners)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#10&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://esbenp.gallerycdn.vsassets.io/extensions/esbenp/prettier-vscode/11.0.0/1723648421534/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+Prettier - Code formatter
+&amp;lt;br&amp;gt;
+(Prettier)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#11&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://zobo.gallerycdn.vsassets.io/extensions/zobo/php-intellisense/1.3.3/1694733996289/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+PHP IntelliSense
+&amp;lt;br&amp;gt;
+(Damjan Cvetko)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#12&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://mehedidracula.gallerycdn.vsassets.io/extensions/mehedidracula/php-namespace-resolver/1.1.9/1656799011659/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+PHP Namespace Resolver
+&amp;lt;br&amp;gt;
+(Mehedi Hassan)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#13&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://equinusocio.gallerycdn.vsassets.io/extensions/equinusocio/vsc-material-theme-icons/3.8.10/1731100343339/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+Material Theme Icons
+&amp;lt;br&amp;gt;
+(Equinusocio)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#14&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://albymor.gallerycdn.vsassets.io/extensions/albymor/increment-selection/0.2.0/1576523763134/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+Increment Selection
+&amp;lt;br&amp;gt;
+(Alberto Morato)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#15&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://donjayamanne.gallerycdn.vsassets.io/extensions/donjayamanne/jquerysnippets/0.0.1/1474455550460/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+jQuery Code Snippets
+&amp;lt;br&amp;gt;
+(Don Jayamanne)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#16&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://adpyke.gallerycdn.vsassets.io/extensions/adpyke/codesnap/1.3.4/1625238962906/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+CodeSnap
+&amp;lt;br&amp;gt;
+(adpyke)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#17&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://sleistner.gallerycdn.vsassets.io/extensions/sleistner/vscode-fileutils/3.10.3/1690034496024/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+File Utils
+&amp;lt;br&amp;gt;
+(Steffen Leistner)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#18&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://fallenmax.gallerycdn.vsassets.io/extensions/fallenmax/mithril-emmet/0.7.7/1648523464540/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+Mithril Emmet
+&amp;lt;br&amp;gt;
+(FallenMax)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#19&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://liamhammett.gallerycdn.vsassets.io/extensions/liamhammett/inline-parameters/0.2.1/1591646480793/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+Inline Parameters for VSCode
+&amp;lt;br&amp;gt;
+(Liam Hammett)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#20&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://xyz.gallerycdn.vsassets.io/extensions/xyz/local-history/1.8.1/1583352056596/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+Local History
+&amp;lt;br&amp;gt;
+(xyz)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;
+&amp;lt;td class=&quot;highlight&quot;&amp;gt;#21&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+&amp;lt;img class=&quot;icon&quot;  alt=&quot;Auto Close Tag&quot; src=&quot;https://dotenv.gallerycdn.vsassets.io/extensions/dotenv/dotenv-vscode/0.28.1/1699146869103/Microsoft.VisualStudio.Services.Icons.Default&quot; &amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;/td&amp;gt;
+&amp;lt;td&amp;gt;
+Dotenv Official +Vault
+&amp;lt;br&amp;gt;
+(Dotenv)
+&amp;lt;/td&amp;gt;
+&amp;lt;!-- &amp;lt;td class=&quot;text-center status-inactive&quot;&amp;gt;On Leave&amp;lt;/td&amp;gt; --&amp;gt;
+&amp;lt;/tr&amp;gt;
+&amp;lt;/tbody&amp;gt;
+&amp;lt;/table&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// Shift + Ctrl + p   :find(settings.json)
+{
+    &quot;workbench.iconTheme&quot;: &quot;material-icon-theme&quot;,
+    &quot;laravel-pint.enable&quot;: true,
+    &quot;[php]&quot;: {
+    &quot;editor.defaultFormatter&quot;: &quot;open-southeners.laravel-pint&quot;
+    },
+    &quot;[json]&quot;: {
+    &quot;editor.defaultFormatter&quot;: &quot;vscode.json-language-features&quot;
+    },
+    &quot;[javascript]&quot;: {
+    &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+    },
+    &quot;[css]&quot;: {
+    &quot;editor.defaultFormatter&quot;: &quot;vscode.css-language-features&quot;
+    },
+    &quot;workbench.startupEditor&quot;: &quot;none&quot;,
+    &quot;editor.stickyScroll.enabled&quot;: false,
+    &quot;diffEditor.ignoreTrimWhitespace&quot;: false,
+    &quot;git.confirmSync&quot;: false,
+    &quot;editor.formatOnSave&quot;: true,
+    &quot;workbench.colorTheme&quot;: &quot;Default Light+&quot;,
+    &quot;files.associations&quot;: {
+    &quot;.env*&quot;: &quot;dotenv&quot;
+    },
+    &quot;editor.tokenColorCustomizations&quot;: {
+    &quot;textMateRules&quot;: []
+    },
+    &quot;dotenv.enableAutocloaking&quot;: false,
+}
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded></item><item><title>Mysql Replication</title><link>https://fuwari.vercel.app/posts/mysql-replication/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/mysql-replication/</guid><description>Mysql Replication on how make backup database server</description><pubDate>Sat, 22 Mar 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Introduction to MySQL Replication (Master-Slave)&lt;/h1&gt;
 &lt;p&gt;have the basic knowledge replication mysql by own simulation in virtualbox&lt;/p&gt;
 &lt;p&gt;&amp;lt;!-- &amp;lt;/div&amp;gt; --&amp;gt;&lt;/p&gt;
 &lt;p&gt;&amp;lt;br&amp;gt;&lt;/p&gt;
