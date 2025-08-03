@@ -1,4 +1,233 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fauzan00</title><description>Demo Site</description><link>https://fuwari.vercel.app/</link><language>en</language><item><title>VS Code Extension</title><link>https://fuwari.vercel.app/posts/plugin/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/plugin/</guid><description>VS Code Extension notes</description><pubDate>Sat, 22 Mar 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&amp;lt;style&amp;gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fauzan00</title><description>Demo Site</description><link>https://fuwari.vercel.app/</link><language>en</language><item><title>Laravel Deploy Cloud VPS Configuration</title><link>https://fuwari.vercel.app/posts/deploy_cloud/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/deploy_cloud/</guid><description>configure LEMP and Domain Cloudflare</description><pubDate>Sun, 03 Aug 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&amp;lt;style&amp;gt;
+.table-container {
+overflow-x: auto;
+margin: 1rem 0;
+}&lt;/p&gt;
+&lt;p&gt;.table-container table {
+width: 100%;
+border-collapse: collapse;
+margin: 0;
+}&lt;/p&gt;
+&lt;p&gt;.table-container th,
+.table-container td {
+padding: 12px;
+text-align: left;
+border: 1px solid #ddd;
+vertical-align: middle;
+}&lt;/p&gt;
+&lt;p&gt;.table-container th {
+background-color: #f5f5f5;
+font-weight: bold;
+}&lt;/p&gt;
+&lt;p&gt;.table-container .highlight {
+font-weight: bold;
+color: #2563eb;
+}&lt;/p&gt;
+&lt;p&gt;.table-container .icon {
+width: 32px;
+height: 32px;
+object-fit: contain;
+display: block;
+margin: 0 auto;
+}&lt;/p&gt;
+&lt;p&gt;.table-container td:nth-child(2) {
+text-align: center;
+width: 60px;
+}&lt;/p&gt;
+&lt;p&gt;.table-container td:nth-child(1) {
+width: 60px;
+text-align: center;
+}&lt;/p&gt;
+&lt;p&gt;@media (max-width: 768px) {
+.table-container .icon {
+width: 24px;
+height: 24px;
+}&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.table-container th,
+.table-container td {
+    padding: 8px;
+    font-size: 14px;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;}
+&amp;lt;/style&amp;gt;&lt;/p&gt;
+&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;h5&gt;(Published on August 3, 2025)&lt;/h5&gt;
+&lt;p&gt;In this article, I will walk through the LEMP Configuration.&lt;/p&gt;
+&lt;p&gt;&amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;h1&gt;VS CODE Extensions&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div class=&quot;separator&quot;&amp;gt;&amp;lt;/div&amp;gt;
+In this article, we will walk through the steps of configure a web application using vultr server and domain with ssl from cloudflare.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image/vultr.png&quot; alt=&quot;vultr1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;center&amp;gt;
+&amp;lt;i&amp;gt; flow web application&amp;lt;/i&amp;gt;
+&amp;lt;/center&amp;gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Server (Vultr)
+├── Web Server
+├── Database MySQL
+├── Firewall
+├── Php
+├── Composer
+├── SSH
+├── SSL
+└── Git 
+
+
+Domain (Cloudflare)
+├── buy domain
+└── set dns
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;h1&gt;Server Vultr Configuration&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div class=&quot;separator&quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;Step intro - Rent Share CPU Server in Vultr&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/image/vultr1.png&quot; alt=&quot;vultr1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image/vultr2.png&quot; alt=&quot;vultr2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image/vultr3.png&quot; alt=&quot;vultr3&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image/vultr4.png&quot; alt=&quot;vultr4&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image/vultr5.png&quot; alt=&quot;vultr5&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image/vultr6.png&quot; alt=&quot;vultr6&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;center&amp;gt;
+&amp;lt;i&amp;gt; Basic Configuration Server only on 1 server&amp;lt;/i&amp;gt;
+&amp;lt;/center&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;div class=&quot;credentials-box&quot;&amp;gt;
+&amp;lt;div class=&quot;hierarchy-list&quot;&amp;gt;&lt;/p&gt;
+&lt;h2&gt;Step 1 — Installing Web Server&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt install nginx -y
+sudo systemctl start nginx
+sudo systemctl enable nginx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 2 — Installing MySQL&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt install mysql-server -y
+sudo mysql_secure_installation
+
+CREATE DATABASE your_database_name;
+CREATE USER &apos;your_username&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;your_password&apos;;
+GRANT ALL PRIVILEGES ON your_database_name.* TO &apos;your_username&apos;@&apos;localhost&apos;;
+FLUSH PRIVILEGES;
+EXIT;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Database Credentials&lt;/h3&gt;
+&lt;h4&gt;🔑 DB root user (full access)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Username:&lt;/strong&gt; &lt;code&gt;root&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Password:&lt;/strong&gt; &lt;code&gt;abc123&lt;/code&gt; &lt;em&gt;(change this in production!)&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;🔄 DB normal user (project access)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Username:&lt;/strong&gt; &lt;code&gt;adminProject&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Password:&lt;/strong&gt; &lt;code&gt;abc123&lt;/code&gt; &lt;em&gt;(use unique passwords!)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;Step 3 — Installing Php&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt install php8.3-fpm php8.3-mysql php8.3-cli php8.3-xml php8.3-mbstring php8.3-curl php8.3-zip
+sudo systemctl start php8.3-fpm
+sudo systemctl enable php8.3-fpm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 4 — Installing Composer&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;php -r &quot;copy(&apos;https://getcomposer.org/installer&apos;, &apos;composer-setup.php&apos;);&quot;
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+php -r &quot;unlink(&apos;composer-setup.php&apos;);&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 5 — Gernerate ssh key&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;ssh-keygen -t rsa -b 4096
+cat ~/.ssh/id_rsa.pub
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 6 — Create Laravel Project&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;cd /var/www/
+composer create-project --prefer-dist laravel/laravel project
+cp .env.example .env
+nano .env
+
+
+APP_URL=http://project.com
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=project
+DB_USERNAME=adminProject
+DB_PASSWORD=xxxxxx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 7 — Set permission laravel file&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;php artisan key:generate
+sudo chown -R www-data:www-data /var/www/project/storage /var/www/project/bootstrap/cache
+sudo chmod -R 775 /var/www/project/storage /var/www/project/bootstrap/cache
+php artisan migrate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 8 — Installing Git&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;git init
+git config --global user.name &quot;momotaro&quot;
+git config --global user.email momo@gmail.com
+git branch -M main
+git commit -m &quot;first commit&quot;
+git remote add origin git@github.com:momo/project.git
+git branch -m master main
+git add .
+git commit -m &quot;Initial commit&quot;
+git push -u origin main
+git push origin main
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 9 — Allowing firewall port (http and https)&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt; sudo ufw allow http
+ sudo ufw allow https
+ sudo ufw reload
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 10 — Cnnfiguring domain name in Web Service&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;cd /etc/nginx/sites-available/
+sudo unlink /etc/nginx/sites-enabled/default
+
+nano project.conf
+
+
+#==============
+# project.conf
+#=============
+
+server {
+    server_name project.com www.project.com;
+
+    root /var/www/project/public;
+    index index.php index.html;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+
+sudo ln -s /etc/nginx/sites-available/project.conf /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Step 11 — Request SSL from Cloudflare&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d project.com -d www.project.com --register-unsafely-without-email --agree-tos
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;h1&gt;Domain Cloudflare&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div class=&quot;separator&quot;&amp;gt;&amp;lt;/div&amp;gt;
+buy domain name the got that domain dns:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image/cloudflare1.png&quot; alt=&quot;cloudflare1&quot; /&gt;
+&lt;img src=&quot;/image/cloudflare2.png&quot; alt=&quot;cloudflare2&quot; /&gt;&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;by doing this basic configuration on real hands on you can learned the way project deploy in real case.
+Also you will more understand on what the item checking need to be configure in order to run your web app.&lt;/p&gt;
+</content:encoded></item><item><title>VS Code Extension</title><link>https://fuwari.vercel.app/posts/plugin/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/plugin/</guid><description>VS Code Extension notes</description><pubDate>Sat, 22 Mar 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&amp;lt;style&amp;gt;
 .table-container {
 overflow-x: auto;
 margin: 1rem 0;
