@@ -55,7 +55,7 @@ height: 24px;
 &lt;h5&gt;(Published on August 3, 2025)&lt;/h5&gt;
 &lt;p&gt;In this article, I will walk through the LEMP Configuration.&lt;/p&gt;
 &lt;p&gt;&amp;lt;br&amp;gt;&lt;/p&gt;
-&lt;h1&gt;VS CODE Extensions&lt;/h1&gt;
+&lt;h1&gt;LEMP VPS deployment&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div class=&quot;separator&quot;&amp;gt;&amp;lt;/div&amp;gt;
 In this article, we will walk through the steps of configure a web application using vultr server and domain with ssl from cloudflare.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/image/vultr.png&quot; alt=&quot;vultr1&quot; /&gt;&lt;/p&gt;
