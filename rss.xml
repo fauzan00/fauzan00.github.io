@@ -304,8 +304,7 @@ ssl configure generate:&lt;/p&gt;
 &lt;img src=&quot;/image/cloudflare4.png&quot; alt=&quot;cloudflare4&quot; /&gt;
 &lt;img src=&quot;/image/cloudflare5.png&quot; alt=&quot;cloudflare5&quot; /&gt;
 &lt;img src=&quot;/image/cloudflare6.png&quot; alt=&quot;cloudflare6&quot; /&gt;
-&lt;img src=&quot;/image/cloudflare7.png&quot; alt=&quot;cloudflare7&quot; /&gt;
-&lt;img src=&quot;/image/cloudflare8.png&quot; alt=&quot;cloudflare8&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/image/cloudflare7.png&quot; alt=&quot;cloudflare7&quot; /&gt;&lt;/p&gt;
 &lt;h1&gt;Conclusion&lt;/h1&gt;
 &lt;p&gt;by doing this basic configuration on real hands on you can learned the way project deploy in real case.
 Also you will more understand on what the item checking need to be configure in order to run your web app.&lt;/p&gt;
