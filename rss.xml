@@ -262,6 +262,8 @@ server {
 }
 
 sudo ln -s /etc/nginx/sites-available/project.conf /etc/nginx/sites-enabled/
+sudo nano  /etc/cloudflare/project.com.pem
+sudo nano  /etc/cloudflare/project.com.key
 sudo nginx -t
 sudo systemctl reload nginx
 &lt;/code&gt;&lt;/pre&gt;
