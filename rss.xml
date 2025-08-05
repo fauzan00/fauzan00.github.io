@@ -135,7 +135,7 @@ sudo systemctl enable php8.3-fpm
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 php -r &quot;unlink(&apos;composer-setup.php&apos;);&quot;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Step 5 — Gernerate ssh key&lt;/h2&gt;
+&lt;h2&gt;Step 5 — Generate ssh key&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;ssh-keygen -t rsa -b 4096
 cat ~/.ssh/id_rsa.pub
 &lt;/code&gt;&lt;/pre&gt;
@@ -179,7 +179,7 @@ git push origin main
  sudo ufw allow https
  sudo ufw reload
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Step 10 — Cnnfiguring domain name in Web Service&lt;/h2&gt;
+&lt;h2&gt;Step 10 — Configuring domain name in Web Service&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;cd /etc/nginx/sites-available/
 sudo unlink /etc/nginx/sites-enabled/default
 
