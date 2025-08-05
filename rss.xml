@@ -190,6 +190,9 @@ nano project.conf
 # project.conf
 #=============
 
+#=========
+#normal config no ssl cloudflare
+#=========
 server {
     server_name project.com www.project.com;
 
@@ -205,6 +208,54 @@ server {
         fastcgi_pass unix:/run/php/php8.3-fpm.sock;
     }
 
+    location ~ /\.ht {
+        deny all;
+    }
+}
+
+#=============
+# configure with ssl cloudflare
+#=============
+# Redirect HTTP to HTTPS (Cloudflare-friendly)
+server {
+    listen 80;
+    listen [::]:80;
+    server_name project.com www.project.com;
+    return 301 https://project.com$request_uri;
+}
+
+# Main HTTPS server
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name project.com www.project.com;
+
+    # SSL (Use Cloudflare Origin Certificate)
+    ssl_certificate     /etc/cloudflare/project.com.pem;
+    ssl_certificate_key /etc/cloudflare/project.com.key;
+    
+    # Basic SSL settings (safe defaults)
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:SSL:10m;
+
+    # Website root
+    root /var/www/project/public;
+    index index.php index.html;
+
+    # Handle requests
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # PHP-FPM config
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+    }
+
+    # Security: Block hidden files
     location ~ /\.ht {
         deny all;
     }
@@ -228,7 +279,7 @@ sudo systemctl stop certbot.timer
 sudo systemctl disable certbot.timer
 
 # Remove Certbot packages
-sudo apt remove --purge certbot python3-certbot-*
+sudo apt remove --purge certbot python3-certbot-nginx
 
 # Remove any remaining configuration files
 sudo rm -rf /etc/letsencrypt/
