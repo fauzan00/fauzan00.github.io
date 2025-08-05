@@ -214,16 +214,41 @@ sudo ln -s /etc/nginx/sites-available/project.conf /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Step 11 — Request SSL from Cloudflare&lt;/h2&gt;
+&lt;h2&gt;Step 11 — Request SSL free version (optional)&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;sudo apt install certbot python3-certbot-nginx
 sudo certbot --nginx -d project.com -d www.project.com --register-unsafely-without-email --agree-tos
+sudo certbot renew --dry-run
+
+##=== confirm a cronjob or systemd===##
+systemctl list-timers | grep certbot
+
+
+# Stop any running Certbot services
+sudo systemctl stop certbot.timer
+sudo systemctl disable certbot.timer
+
+# Remove Certbot packages
+sudo apt remove --purge certbot python3-certbot-*
+
+# Remove any remaining configuration files
+sudo rm -rf /etc/letsencrypt/
+sudo rm -rf /var/log/letsencrypt/
+
+# Clean up unused dependencies
+sudo apt autoremove
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&lt;/p&gt;
 &lt;h1&gt;Domain Cloudflare&lt;/h1&gt;
 &lt;p&gt;&amp;lt;div class=&quot;separator&quot;&amp;gt;&amp;lt;/div&amp;gt;
 buy domain name the got that domain dns:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/image/cloudflare1.png&quot; alt=&quot;cloudflare1&quot; /&gt;
-&lt;img src=&quot;/image/cloudflare2.png&quot; alt=&quot;cloudflare2&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/image/cloudflare2.png&quot; alt=&quot;cloudflare2&quot; /&gt;
+&lt;img src=&quot;/image/cloudflare3.png&quot; alt=&quot;cloudflare2&quot; /&gt;
+&lt;img src=&quot;/image/cloudflare4.png&quot; alt=&quot;cloudflare2&quot; /&gt;
+&lt;img src=&quot;/image/cloudflare5.png&quot; alt=&quot;cloudflare2&quot; /&gt;
+&lt;img src=&quot;/image/cloudflare6.png&quot; alt=&quot;cloudflare2&quot; /&gt;
+&lt;img src=&quot;/image/cloudflare7.png&quot; alt=&quot;cloudflare2&quot; /&gt;
+&lt;img src=&quot;/image/cloudflare8.png&quot; alt=&quot;cloudflare2&quot; /&gt;&lt;/p&gt;
 &lt;h1&gt;Conclusion&lt;/h1&gt;
 &lt;p&gt;by doing this basic configuration on real hands on you can learned the way project deploy in real case.
 Also you will more understand on what the item checking need to be configure in order to run your web app.&lt;/p&gt;
