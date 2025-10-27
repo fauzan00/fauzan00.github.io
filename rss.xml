@@ -49,7 +49,7 @@ href=&quot;https://www.w3schools.com/mysql/mysql_create_index.asp&quot;&amp;gt;(
 &lt;li&gt;Setup Mysql Index &amp;lt;a target=&quot;_blank&quot;
 href=&quot;https://dev.mysql.com/doc/refman/8.4/en/create-index.html&quot;&amp;gt;(link)&amp;lt;/a&amp;gt;&lt;/li&gt;
 &lt;/ol&gt;
-</content:encoded></item><item><title>Mysql Indexing</title><link>https://fuwari.vercel.app/posts/mysql-reset-password/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/mysql-reset-password/</guid><description>Mysql indexing column</description><pubDate>Sun, 26 Oct 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Introduction to MySQL Index&lt;/h1&gt;
+</content:encoded></item><item><title>Mysql Reset Password</title><link>https://fuwari.vercel.app/posts/mysql-reset-password/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/mysql-reset-password/</guid><description>Mysql Reset Password</description><pubDate>Sun, 26 Oct 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Introduction to MySQL Reset Password&lt;/h1&gt;
 &lt;p&gt;have the basic knowledge reset mysql password&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Issue mysql password
 
