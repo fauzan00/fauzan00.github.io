@@ -515,6 +515,57 @@ height: 24px;
     },
     &quot;dotenv.enableAutocloaking&quot;: false
 }&lt;/code&gt;&lt;/pre&gt;
+</content:encoded></item><item><title>Mysql Indexing</title><link>https://fuwari.vercel.app/posts/mysql-indexing/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/mysql-indexing/</guid><description>Mysql indexing column</description><pubDate>Sat, 22 Mar 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Introduction to MySQL Index&lt;/h1&gt;
+&lt;p&gt;have the basic knowledge indexing mysql&lt;/p&gt;
+&lt;p&gt;&amp;lt;!-- &amp;lt;/div&amp;gt; --&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div class=&quot;separator&quot;&amp;gt;&amp;lt;/div&amp;gt;
+In this article, we will walk through the steps of creating a simple database index&lt;/p&gt;
+&lt;p&gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;h1&gt;Command MySQL&lt;/h1&gt;
+&lt;p&gt;&amp;lt;div class=&quot;separator&quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/p&gt;
+&lt;h2&gt;Show Index&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;# Command
+SHOW INDEX from table_name;
+
+#example
+show index from Persons;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Create Index&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;# Command
+CREATE INDEX index_name
+ON table_name (column1, column2, ...);
+
+#example
+mysql&amp;gt; CREATE INDEX idx_lastname
+ON Persons (LastName);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Drop Index&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;# Command
+ALTER TABLE table_name
+DROP INDEX index_name;
+
+#example
+mysql&amp;gt; ALTER TABLE Persons
+DROP INDEX idx_lastname;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;sometime the large data load make the datatable heavy, thus the application code site cannot handle it. So, make the tune in the database.&lt;/p&gt;
+&lt;p&gt;you can choose to solve issue as below:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Solve issue METHOD:
+├── 1) make indexing for column in mysql (more prefer)
+└── 2) spend money by upgrade resource server db
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;p&gt;Reference web link:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;W3School mysql indexing &amp;lt;a target=&quot;_blank&quot;
+href=&quot;https://www.w3schools.com/mysql/mysql_create_index.asp&quot;&amp;gt;(link)&amp;lt;/a&amp;gt;&lt;/li&gt;
+&lt;li&gt;Setup Mysql Index &amp;lt;a target=&quot;_blank&quot;
+href=&quot;https://dev.mysql.com/doc/refman/8.4/en/create-index.html&quot;&amp;gt;(link)&amp;lt;/a&amp;gt;&lt;/li&gt;
+&lt;/ol&gt;
 </content:encoded></item><item><title>Mysql Replication</title><link>https://fuwari.vercel.app/posts/mysql-replication/</link><guid isPermaLink="true">https://fuwari.vercel.app/posts/mysql-replication/</guid><description>Mysql Replication on how make backup database server</description><pubDate>Sat, 22 Mar 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Introduction to MySQL Replication (Master-Slave)&lt;/h1&gt;
 &lt;p&gt;have the basic knowledge replication mysql by own simulation in virtualbox&lt;/p&gt;
 &lt;p&gt;&amp;lt;!-- &amp;lt;/div&amp;gt; --&amp;gt;&lt;/p&gt;
