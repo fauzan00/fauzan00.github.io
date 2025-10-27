@@ -68,9 +68,6 @@ In this article, we will walk through the steps of creating a reset password if 
 &lt;h2&gt;find folder mysql&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;# Command
 sudo ls -la /var/lib/mysql/
-
-#example
-show index from Persons;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;Stop service Mysql and change ownership (if not correct)&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;sudo service mysql stop
