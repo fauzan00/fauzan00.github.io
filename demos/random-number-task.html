@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bubble Sort Visualization</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <style>
+      .array-card {
+        display: inline-block;
+        min-width: 90px;
+        padding: 10px 15px;
+        margin: 5px;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        text-align: center;
+        transition: all 0.3s ease;
+        background: white;
+        word-break: break-word;
+      }
+      .array-card.highlight {
+        background-color: #fff3cd;
+        border-color: #ffc107;
+        transform: scale(1.1);
+      }
+      .array-card.selected {
+        background-color: #d4edda;
+        border-color: #28a745;
+        transform: scale(1.15);
+        box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+      }
+      .array-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin: 10px 0;
+      }
+      .var-display {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 5px;
+        background: #e7f3ff;
+        border: 2px solid #0d6efd;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+      .var-display.active {
+        background: #ffc107;
+        border-color: #ff9800;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-4">
+      <!-- Algorithm Explanation -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="card-title">Task- Get the Frequent number</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            Given a random non-empty array of integers, write a script that is
+            able to output the integer number that appears the most.
+            <br />
+            <br />
+            Kindly do not use any library functions to directly return the most
+            common number, as doing so will result in immediate failure.
+            <br />
+            <br />
+            <strong>Example:</strong>
+            <br />
+            Input:nums =[3,2,2,2,2,2,3,4,5] Output:2
+            <br />
+            <br />
+            Input:nums =[1,2,3,4,5,5] Output:5
+          </p>
+        </div>
+      </div>
+
+      <!-- Algorithm Explanation -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="card-title">Answer and Explanation</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            <strong>Algorithm Approach (No Library Functions):</strong>
+            <br />
+            This solution uses only basic loops and comparisons - no indexOf(), map(), filter(), or other array methods.
+            <br />
+            <br />
+            <strong>Step 0: Parse String into Array (Manual Chunking)</strong>
+            <br />
+            <em>Separate comma-separated string into array of numbers:</em>
+            <br />
+            • Iterate through string character by character
+            <br />
+            • Build current number string until comma is found
+            <br />
+            • When comma found → trim spaces, convert to number, add to array
+            <br />
+            • Process last number after loop ends
+            <br />
+            • Result: Array of numbers ready for processing
+            <br />
+            <br />
+            <strong>Step 1: Build a List by Counting Occurrences</strong>
+            <br />
+            <em>Iterate through input array and build two parallel lists:</em>
+            <br />
+            • <strong>numbers[]</strong> - stores unique numbers found
+            <br />
+            • <strong>counts[]</strong> - stores how many times each number appears
+            <br />
+            • For each number: check if it exists in list (iterate through numbers[])
+            <br />
+            &nbsp;&nbsp;- If new → add to both lists, increment size
+            <br />
+            &nbsp;&nbsp;- If exists → increment its count
+            <br />
+            <br />
+            <strong>Step 2: Find Maximum by Listing Through Counts</strong>
+            <br />
+            <em>Iterate through the counts list to find the highest value:</em>
+            <br />
+            • Initialize: maxCount = -1, mostFrequentNumber = null
+            <br />
+            • List through each count: if counts[k] > maxCount
+            <br />
+            &nbsp;&nbsp;- Update maxCount and mostFrequentNumber
+            <br />
+            <br />
+            <strong>Result:</strong> mostFrequentNumber is the answer
+          </p>
+          <hr />
+          <strong>JavaScript Implementation:</strong>
+          <pre class="bg-light p-3 rounded mt-2"><code>// STEP 0: Parse comma-separated string into array
+function parseNumbers(inputString) {
+  let numsArray = [];
+  let arrayIndex = 0;
+  let currentNumberString = "";
+  
+  let i = 0;
+  while (inputString[i] !== undefined) {  // Iterate char by char
+    const char = inputString[i];
+    
+    if (char === ',') {  // Found comma separator
+      // Trim spaces manually
+      let processedStr = "";
+      let k = 0;
+      while (currentNumberString[k] !== undefined) {
+        if (currentNumberString[k] !== ' ') {
+          processedStr += currentNumberString[k];
+        }
+        k++;
+      }
+      
+      // Convert to number and add to array
+      if (processedStr !== "") {
+        const num = parseInt(processedStr);
+        if (!isNaN(num)) {
+          numsArray[arrayIndex] = num;
+          arrayIndex++;
+        }
+      }
+      currentNumberString = "";  // Reset for next number
+    } else {
+      currentNumberString += char;  // Build number string
+    }
+    i++;
+  }
+  
+  // Process last number (no comma after it)
+  if (currentNumberString !== "") {
+    let processedStr = "";
+    let k = 0;
+    while (currentNumberString[k] !== undefined) {
+      if (currentNumberString[k] !== ' ') {
+        processedStr += currentNumberString[k];
+      }
+      k++;
+    }
+    if (processedStr !== "") {
+      const num = parseInt(processedStr);
+      if (!isNaN(num)) {
+        numsArray[arrayIndex] = num;
+      }
+    }
+  }
+  
+  return numsArray;
+}
+
+// MAIN ALGORITHM: Find most frequent number
+function findMostFrequent(nums) {
+  // Initialize two parallel arrays and size counter
+  let numbers = [];  // Stores unique numbers
+  let counts = [];   // Stores count for each number
+  let size = 0;      // Manual size tracking
+  
+  // LOOP 1: Build list by counting occurrences
+  let i = 0;
+  while (nums[i] !== undefined) {  // Iterate through input
+    const currentNum = nums[i];
+    let found = false;
+    let index = -1;
+    
+    // Inner loop: Check if currentNum exists in numbers[]
+    let j = 0;
+    while (j < size) {  // List through existing numbers
+      if (numbers[j] === currentNum) {
+        found = true;   // Number found
+        index = j;      // Store its position
+        break;          // Exit inner loop
+      }
+      j++;  // Move to next position
+    }
+    
+    // Process based on whether number was found
+    if (!found) {
+      // New number: add to both lists
+      numbers[size] = currentNum;
+      counts[size] = 1;
+      size++;  // Increment size counter
+    } else {
+      // Existing number: increment its count
+      counts[index]++;
+    }
+    i++;  // Move to next input number
+  }
+  
+  // LOOP 2: List through counts to find maximum
+  let maxCount = -1;              // Track highest count
+  let mostFrequentNumber = null;  // Track number with highest count
+  
+  let k = 0;
+  while (k < size) {  // Iterate through all counts
+    if (counts[k] > maxCount) {
+      // Found new maximum
+      maxCount = counts[k];
+      mostFrequentNumber = numbers[k];
+    }
+    k++;  // Move to next count
+  }
+  
+  return mostFrequentNumber;  // Return the result
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Tabs Section -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="simple-tab" data-bs-toggle="tab" data-bs-target="#simple" type="button" role="tab">Simple (No Animation)</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="animated-tab" data-bs-toggle="tab" data-bs-target="#animated" type="button" role="tab">With Animation</button>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="tab-content">
+            <!-- Animated Tab -->
+            <div class="tab-pane fade" id="animated" role="tabpanel">
+              <div class="mb-3">
+                <label for="numberInput" class="form-label">Enter numbers (comma-separated):</label>
+                <input type="text" class="form-control" id="numberInput" placeholder="e.g., 3,2,2,2,2,2,3,4,5" value="3,2,2,2,2,2,3,4,5">
+              </div>
+              <button class="btn btn-primary" onclick="startAlgorithm()">Find Most Frequent (Animated)</button>
+              <button class="btn btn-secondary" onclick="resetVisualization()">Reset</button>
+
+              <!-- Current Process Description -->
+              <div class="card mt-4" id="processDescription" style="display:none;">
+                <div class="card-header bg-primary text-white">
+                  <h5 class="card-title mb-0" id="processTitle">Process</h5>
+                </div>
+                <div class="card-body">
+                  <p class="mb-0" id="processText"></p>
+                </div>
+              </div>
+
+              <!-- Parsing Visualization -->
+              <div class="card mt-4" id="parsingCard" style="display:none;">
+                <div class="card-header">
+                  <h5 class="card-title">Parsing Visualization</h5>
+                </div>
+                <div class="card-body">
+                  <div class="mb-3">
+                    <strong>Input String:</strong>
+                    <div id="inputString" class="array-container" style="background: #fff3cd;"></div>
+                  </div>
+                  <div class="mb-3">
+                    <strong>Parsed Numbers Array:</strong>
+                    <div id="parsedArray" class="array-container">Empty</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Array Visualization -->
+              <div class="card mt-4">
+                <div class="card-header">
+                  <h5 class="card-title">Arrays Visualization</h5>
+                </div>
+                <div class="card-body">
+                  <div class="mb-3">
+                    <strong>numbers[] =</strong>
+                    <div id="numbersArray" class="array-container">Empty</div>
+                  </div>
+                  <div class="mb-3">
+                    <strong>counts[] =</strong>
+                    <div id="countsArray" class="array-container">Empty</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Variables Display -->
+              <div class="card mt-4">
+                <div class="card-header">
+                  <h5 class="card-title">Variables</h5>
+                </div>
+                <div class="card-body text-center">
+                  <div id="variables">
+                    <span class="var-display">max = 0</span>
+                    <span class="var-display">id = 0</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Process Steps -->
+              <div class="card mt-4">
+                <div class="card-header">
+                  <h5 class="card-title">Process Steps</h5>
+                </div>
+                <div class="card-body">
+                  <div id="processSteps" class="mb-3"></div>
+                  <div id="result" class="alert alert-success" style="display:none;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Simple Tab -->
+            <div class="tab-pane fade show active" id="simple" role="tabpanel">
+              <div class="mb-3">
+                <label for="numberInputSimple" class="form-label">Enter numbers (comma-separated):</label>
+                <input type="text" class="form-control" id="numberInputSimple" placeholder="e.g., 3,2,2,2,2,2,3,4,5" value="3,2,2,2,2,2,3,4,5">
+              </div>
+              <button class="btn btn-success" onclick="runSimpleAlgorithm()">Find Most Frequent (Instant)</button>
+              <button class="btn btn-secondary" onclick="resetSimple()">Reset</button>
+
+              <div id="simpleOutput" class="mt-4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let stepDelay = 1000;
+
+      // Manual function to parse comma-separated string
+      function parseNumbers(inputString) {
+        let numsArray = [];
+        let arrayIndex = 0;
+        let currentNumberString = "";
+        
+        // Helper function to process and store number
+        function processAndStoreNumber(str) {
+          let processedStr = "";
+          let k = 0;
+          
+          // Manual trim (remove spaces)
+          while (str[k] !== undefined) {
+            const char = str[k];
+            if (char !== ' ') {
+              processedStr = processedStr + char;
+            }
+            k++;
+          }
+          
+          if (processedStr !== "") {
+            const num = parseInt(processedStr);
+            if (!isNaN(num)) {
+              numsArray[arrayIndex] = num;
+              arrayIndex++;
+            }
+          }
+        }
+        
+        // Parse string character by character
+        let i = 0;
+        while (inputString[i] !== undefined) {
+          const char = inputString[i];
+          
+          if (char === ',') {
+            processAndStoreNumber(currentNumberString);
+            currentNumberString = "";
+          } else {
+            currentNumberString = currentNumberString + char;
+          }
+          i++;
+        }
+        
+        // Process last number
+        processAndStoreNumber(currentNumberString);
+        
+        return numsArray;
+      }
+
+      // Core algorithm function
+      function findMostFrequent(nums) {
+        let numbers = [];
+        let counts = [];
+        let size = 0;
+        
+        // Loop 1: Count occurrences
+        let i = 0;
+        while (nums[i] !== undefined) {
+          const currentNum = nums[i];
+          let found = false;
+          let index = -1;
+          
+          // Check if number exists
+          let j = 0;
+          while (j < size) {
+            if (numbers[j] === currentNum) {
+              found = true;
+              index = j;
+              break;
+            }
+            j++;
+          }
+          
+          if (!found) {
+            numbers[size] = currentNum;
+            counts[size] = 1;
+            size++;
+          } else {
+            counts[index]++;
+          }
+          i++;
+        }
+        
+        // Loop 2: Find maximum
+        let maxCount = -1;
+        let mostFrequentNumber = null;
+        
+        let k = 0;
+        while (k < size) {
+          if (counts[k] > maxCount) {
+            maxCount = counts[k];
+            mostFrequentNumber = numbers[k];
+          }
+          k++;
+        }
+        
+        return mostFrequentNumber;
+      }
+
+      function appendStep(message, highlight = false) {
+        const processDiv = document.getElementById('processSteps');
+        const stepDiv = document.createElement('div');
+        stepDiv.className = `alert ${highlight ? 'alert-warning' : 'alert-info'} mb-2`;
+        stepDiv.innerHTML = message;
+        processDiv.appendChild(stepDiv);
+        processDiv.scrollTop = processDiv.scrollHeight;
+      }
+
+      function updateArrayDisplay(numbers, counts, highlightIndex = -1, selectedIndex = -1) {
+        const numbersDiv = document.getElementById('numbersArray');
+        const countsDiv = document.getElementById('countsArray');
+        
+        if (numbers.length === 0) {
+          numbersDiv.innerHTML = 'Empty';
+          countsDiv.innerHTML = 'Empty';
+          return;
+        }
+        
+        numbersDiv.innerHTML = '';
+        countsDiv.innerHTML = '';
+        
+        for (let i = 0; i < numbers.length; i++) {
+          const numCard = document.createElement('div');
+          numCard.className = 'array-card';
+          if (i === highlightIndex) numCard.classList.add('highlight');
+          if (i === selectedIndex) numCard.classList.add('selected');
+          numCard.innerHTML = `<div style="font-size: 0.8em; color: #666;">index ${i}</div><div style="font-size: 1.5em; font-weight: bold;">${numbers[i]}</div>`;
+          numbersDiv.appendChild(numCard);
+          
+          const countCard = document.createElement('div');
+          countCard.className = 'array-card';
+          if (i === highlightIndex) countCard.classList.add('highlight');
+          if (i === selectedIndex) countCard.classList.add('selected');
+          countCard.innerHTML = `<div style="font-size: 0.8em; color: #666;">index ${i}</div><div style="font-size: 1.5em; font-weight: bold;">${counts[i]}</div>`;
+          countsDiv.appendChild(countCard);
+        }
+      }
+
+      function updateVariables(max, id, highlight = false, result = null) {
+        const varsDiv = document.getElementById('variables');
+        let html = `
+          <span class="var-display ${highlight ? 'active' : ''}">max = ${max}</span>
+          <span class="var-display ${highlight ? 'active' : ''}">id = ${id}</span>
+        `;
+        if (result !== null) {
+          html += `<span class="var-display" style="background: #d4edda; border-color: #28a745; font-size: 1.2em;">result = ${result}</span>`;
+        }
+        varsDiv.innerHTML = html;
+      }
+
+      function updateProcessDescription(title, text) {
+        document.getElementById('processDescription').style.display = 'block';
+        document.getElementById('processTitle').textContent = title;
+        document.getElementById('processText').innerHTML = text;
+      }
+
+      function updateParsingDisplay(inputStr, parsedNums) {
+        document.getElementById('parsingCard').style.display = 'block';
+        
+        const inputDiv = document.getElementById('inputString');
+        inputDiv.innerHTML = '';
+        let i = 0;
+        while (inputStr[i] !== undefined) {
+          const charCard = document.createElement('div');
+          charCard.className = 'array-card';
+          charCard.style.minWidth = '40px';
+          charCard.style.padding = '8px';
+          if (inputStr[i] === ',') {
+            charCard.style.background = '#ffc107';
+            charCard.style.fontWeight = 'bold';
+          }
+          charCard.innerHTML = `<div style="font-size: 1.2em;">${inputStr[i] === ' ' ? '&nbsp;' : inputStr[i]}</div>`;
+          inputDiv.appendChild(charCard);
+          i++;
+        }
+        
+        const parsedDiv = document.getElementById('parsedArray');
+        if (parsedNums[0] === undefined) {
+          parsedDiv.innerHTML = 'Empty';
+        } else {
+          parsedDiv.innerHTML = '';
+          let j = 0;
+          while (parsedNums[j] !== undefined) {
+            const numCard = document.createElement('div');
+            numCard.className = 'array-card selected';
+            numCard.innerHTML = `<div style="font-size: 0.8em; color: #666;">index ${j}</div><div style="font-size: 1.5em; font-weight: bold;">${parsedNums[j]}</div>`;
+            parsedDiv.appendChild(numCard);
+            j++;
+          }
+        }
+      }
+
+      function resetVisualization() {
+        document.getElementById('processSteps').innerHTML = '';
+        document.getElementById('result').style.display = 'none';
+        document.getElementById('numbersArray').innerHTML = 'Empty';
+        document.getElementById('countsArray').innerHTML = 'Empty';
+        document.getElementById('processDescription').style.display = 'none';
+        document.getElementById('parsingCard').style.display = 'none';
+        document.getElementById('inputString').innerHTML = '';
+        document.getElementById('parsedArray').innerHTML = 'Empty';
+        updateVariables(0, 0);
+      }
+
+      function resetSimple() {
+        document.getElementById('simpleOutput').innerHTML = '';
+      }
+
+      function runSimpleAlgorithm() {
+        const input = document.getElementById('numberInputSimple').value;
+        const nums = parseNumbers(input);
+        
+        if (nums[0] === undefined) {
+          alert('Please enter valid numbers!');
+          return;
+        }
+
+        // Display input
+        let inputDisplay = '';
+        for (let i = 0; nums[i] !== undefined; i++) {
+          inputDisplay += nums[i];
+          if (nums[i + 1] !== undefined) inputDisplay += ', ';
+        }
+
+        let output = `<div class="card"><div class="card-body">`;
+        
+        // Step 0: Show parsing process
+        output += `<h6 class="text-primary">Step 0: Parse String into Array</h6>`;
+        output += `<div class="mb-2"><strong>Input String:</strong> "<code>${input}</code>"</div>`;
+        output += `<div class="mb-2"><strong>Process:</strong> Iterate through string, split by comma separator</div>`;
+        
+        // Show parsing steps
+        let tempNums = [];
+        let tempIndex = 0;
+        let tempStr = "";
+        let j = 0;
+        while (input[j] !== undefined) {
+          if (input[j] === ',') {
+            if (tempStr !== "") {
+              let trimmed = "";
+              let m = 0;
+              while (tempStr[m] !== undefined) {
+                if (tempStr[m] !== ' ') trimmed += tempStr[m];
+                m++;
+              }
+              if (trimmed !== "") {
+                const n = parseInt(trimmed);
+                if (!isNaN(n)) {
+                  tempNums[tempIndex] = n;
+                  output += `<div class="ms-3 mb-1">• Found comma → Chunk: "${tempStr}" → Number: <strong>${n}</strong> → Add to array[${tempIndex}]</div>`;
+                  tempIndex++;
+                }
+              }
+              tempStr = "";
+            }
+          } else {
+            tempStr += input[j];
+          }
+          j++;
+        }
+        if (tempStr !== "") {
+          let trimmed = "";
+          let m = 0;
+          while (tempStr[m] !== undefined) {
+            if (tempStr[m] !== ' ') trimmed += tempStr[m];
+            m++;
+          }
+          if (trimmed !== "") {
+            const n = parseInt(trimmed);
+            if (!isNaN(n)) {
+              tempNums[tempIndex] = n;
+              output += `<div class="ms-3 mb-1">• End of string → Last chunk: "${tempStr}" → Number: <strong>${n}</strong> → Add to array[${tempIndex}]</div>`;
+            }
+          }
+        }
+        
+        output += `<div class="mt-2"><strong>Parsed Array:</strong> [${inputDisplay}]</div><hr>`;
+        
+        // Step 1
+        output += `<h6 class="text-primary">Step 1: Initialize Arrays</h6>`;
+        let numbers = [];
+        let counts = [];
+        let size = 0;
+        output += `<code>let numbers = [];<br>let counts = [];<br>let size = 0;</code><hr>`;
+        
+        // Step 2
+        output += `<h6 class="text-primary">Step 2: Count Occurrences (Loop 1)</h6>`;
+        output += `<div class="mb-2"><code>for (let i = 0; nums[i] !== undefined; i++) {</code></div>`;
+        
+        for (let i = 0; nums[i] !== undefined; i++) {
+          const num = nums[i];
+          let found = false;
+          let index = -1;
+          
+          // Check if number exists
+          for (let j = 0; j < size; j++) {
+            if (numbers[j] === num) {
+              found = true;
+              index = j;
+              break;
+            }
+          }
+          
+          if (!found) {
+            numbers[size] = num;
+            counts[size] = 1;
+            size++;
+            
+            let numsDisplay = '', countsDisplay = '';
+            for (let k = 0; k < size; k++) {
+              numsDisplay += numbers[k];
+              countsDisplay += counts[k];
+              if (k < size - 1) {
+                numsDisplay += ', ';
+                countsDisplay += ', ';
+              }
+            }
+            
+            output += `<div class="ms-3 mb-1">• nums[${i}] = <strong>${num}</strong> → New number, add at index ${size-1}, size = ${size}</div>`;
+            output += `<div class="ms-4 text-muted"><strong>Arrays:</strong> numbers = [${numsDisplay}], counts = [${countsDisplay}]</div>`;
+          } else {
+            counts[index]++;
+            
+            let numsDisplay = '', countsDisplay = '';
+            for (let k = 0; k < size; k++) {
+              numsDisplay += numbers[k];
+              countsDisplay += counts[k];
+              if (k < size - 1) {
+                numsDisplay += ', ';
+                countsDisplay += ', ';
+              }
+            }
+            
+            output += `<div class="ms-3 mb-1">• nums[${i}] = <strong>${num}</strong> → Exists at index ${index}, increment count</div>`;
+            output += `<div class="ms-4 text-muted"><strong>Arrays:</strong> numbers = [${numsDisplay}], counts = [${countsDisplay}]</div>`;
+          }
+        }
+        output += `<div class="mt-2"><code>}</code></div><hr>`;
+        
+        // Step 3
+        output += `<h6 class="text-primary">Step 3: Find Maximum (Loop 2)</h6>`;
+        let max = 0;
+        let id = 0;
+        output += `<code>let max = 0;<br>let id = 0;</code><br><br>`;
+        output += `<code>for (let i = 0; i < size; i++) {</code><br>`;
+        
+        for (let i = 0; i < size; i++) {
+          output += `<div class="ms-3 mb-1">• Check index ${i}: numbers[${i}] = ${numbers[i]}, counts[${i}] = ${counts[i]}`;
+          if (counts[i] > max) {
+            max = counts[i];
+            id = i;
+            output += ` → <strong class="text-success">New max! max = ${max}, id = ${id}</strong>`;
+          } else {
+            output += ` → ${counts[i]} ≤ ${max}, no change`;
+          }
+          output += `</div>`;
+          output += `<div class="ms-4 text-muted"><strong>Current max:</strong> numbers[${id}] = ${numbers[id]} with count = ${max}</div>`;
+        }
+        output += `<div class="mt-2"><code>}</code></div><hr>`;
+        
+        // Result
+        output += `<div class="alert alert-success mt-3">`;
+        output += `<h5>🎉 Result: numbers[${id}] = <strong style="font-size: 1.5em;">${numbers[id]}</strong></h5>`;
+        output += `<p class="mb-0">The number <strong>${numbers[id]}</strong> appears <strong>${max}</strong> times (most frequent)</p>`;
+        output += `</div>`;
+        output += `</div></div>`;
+        
+        document.getElementById('simpleOutput').innerHTML = output;
+      }
+
+      async function startAlgorithm() {
+        resetVisualization();
+        const inputString = document.getElementById('numberInput').value;
+        
+        // Step 0: Parse input string with animation
+        appendStep(`<strong>Step 0: Parse Input String</strong>`, true);
+        updateProcessDescription('Chunking by Comma Separator', 
+          '<strong>Parsing Process:</strong> Iterate through string character by character:<br>' +
+          '• Build current number string<br>' +
+          '• When comma found → Convert to number and add to array<br>' +
+          '• Process last number after loop ends');
+        await sleep(stepDelay);
+        
+        appendStep(`&nbsp;&nbsp;• Input string: "<code>${inputString}</code>"`);
+        await sleep(stepDelay / 2);
+        
+        let nums = [];
+        let arrayIndex = 0;
+        let currentNumberString = "";
+        let i = 0;
+        
+        while (inputString[i] !== undefined) {
+          const char = inputString[i];
+          
+          if (char === ',') {
+            if (currentNumberString !== "") {
+              // Trim and convert
+              let processedStr = "";
+              let k = 0;
+              while (currentNumberString[k] !== undefined) {
+                if (currentNumberString[k] !== ' ') {
+                  processedStr += currentNumberString[k];
+                }
+                k++;
+              }
+              
+              if (processedStr !== "") {
+                const num = parseInt(processedStr);
+                if (!isNaN(num)) {
+                  nums[arrayIndex] = num;
+                  appendStep(`&nbsp;&nbsp;• Found comma at position ${i} → Chunk: "${currentNumberString}" → Number: <strong>${num}</strong>`);
+                  updateParsingDisplay(inputString, nums);
+                  arrayIndex++;
+                  await sleep(stepDelay / 2);
+                }
+              }
+              currentNumberString = "";
+            }
+          } else {
+            currentNumberString += char;
+          }
+          i++;
+        }
+        
+        // Process last number
+        if (currentNumberString !== "") {
+          let processedStr = "";
+          let k = 0;
+          while (currentNumberString[k] !== undefined) {
+            if (currentNumberString[k] !== ' ') {
+              processedStr += currentNumberString[k];
+            }
+            k++;
+          }
+          
+          if (processedStr !== "") {
+            const num = parseInt(processedStr);
+            if (!isNaN(num)) {
+              nums[arrayIndex] = num;
+              appendStep(`&nbsp;&nbsp;• End of string → Last chunk: "${currentNumberString}" → Number: <strong>${num}</strong>`);
+              updateParsingDisplay(inputString, nums);
+              arrayIndex++;
+              await sleep(stepDelay / 2);
+            }
+          }
+        }
+        
+        if (nums[0] === undefined) {
+          alert('Please enter valid numbers!');
+          return;
+        }
+
+        // Display parsed array
+        let inputDisplay = '';
+        for (let i = 0; nums[i] !== undefined; i++) {
+          inputDisplay += nums[i];
+          if (nums[i + 1] !== undefined) inputDisplay += ', ';
+        }
+
+        appendStep(`<strong>Parsed Array:</strong> [${inputDisplay}]`, true);
+        await sleep(stepDelay);
+
+        // Step 1: Initialize arrays
+        appendStep('<strong>Step 1:</strong> Initialize empty arrays and size counter');
+        let numbers = [];
+        let counts = [];
+        let size = 0;
+        updateArrayDisplay(numbers, counts);
+        await sleep(stepDelay);
+
+        // Step 2: Count occurrences
+        appendStep('<strong>Step 2:</strong> Count occurrences of each number');
+        updateProcessDescription('Loop 1: Build List by Counting', 
+          '<strong>Listing Process:</strong> Iterate through input array, building two parallel lists:<br>' +
+          '• <strong>Check</strong>: List through numbers[] to see if current number exists<br>' +
+          '• <strong>New</strong> → Add to numbers[] list, set counts[] = 1, size++<br>' +
+          '• <strong>Exists</strong> → Increment count in counts[] list');
+        await sleep(stepDelay);
+
+        for (let i = 0; nums[i] !== undefined; i++) {
+          const num = nums[i];
+          let found = false;
+          let index = -1;
+          
+          // Check if number exists
+          for (let j = 0; j < size; j++) {
+            if (numbers[j] === num) {
+              found = true;
+              index = j;
+              break;
+            }
+          }
+          
+          if (!found) {
+            numbers[size] = num;
+            counts[size] = 1;
+            appendStep(`&nbsp;&nbsp;• Processing <strong>${num}</strong> → New number, added at index ${size}, size = ${size + 1}`);
+            size++;
+            updateArrayDisplay(numbers.slice(0, size), counts.slice(0, size), size - 1);
+          } else {
+            counts[index]++;
+            appendStep(`&nbsp;&nbsp;• Processing <strong>${num}</strong> → Exists at index ${index}, count increased to ${counts[index]}`);
+            updateArrayDisplay(numbers.slice(0, size), counts.slice(0, size), index);
+          }
+          await sleep(stepDelay);
+        }
+
+        updateArrayDisplay(numbers.slice(0, size), counts.slice(0, size));
+        appendStep('<strong>Step 2 Complete:</strong> All numbers counted', true);
+        await sleep(stepDelay);
+
+        // Step 3: Find maximum
+        appendStep('<strong>Step 3:</strong> Find the number with maximum count');
+        updateProcessDescription('Loop 2: List Through to Find Maximum', 
+          '<strong>Listing Process:</strong> Iterate through counts[] list to find highest:<br>' +
+          '• Initialize: maxCount = -1, mostFrequentNumber = null<br>' +
+          '• List each count: if counts[k] > maxCount<br>' +
+          '&nbsp;&nbsp;→ Update maxCount and mostFrequentNumber<br>' +
+          '• Result: mostFrequentNumber is the answer');
+        let max = 0;
+        let id = 0;
+        updateVariables(max, id);
+        appendStep(`&nbsp;&nbsp;• Initialize: max = ${max}, id = ${id}`);
+        await sleep(stepDelay);
+
+        for (let i = 0; i < size; i++) {
+          updateArrayDisplay(numbers.slice(0, size), counts.slice(0, size), i, id);
+          appendStep(`&nbsp;&nbsp;• Checking index ${i}: number = ${numbers[i]}, count = ${counts[i]}`);
+          await sleep(stepDelay);
+          
+          if (counts[i] > max) {
+            max = counts[i];
+            id = i;
+            updateVariables(max, id, true);
+            updateArrayDisplay(numbers.slice(0, size), counts.slice(0, size), i, id);
+            appendStep(`&nbsp;&nbsp;&nbsp;&nbsp;→ <strong>New maximum!</strong> max = ${max}, id = ${id}`, true);
+            await sleep(stepDelay);
+          } else {
+            appendStep(`&nbsp;&nbsp;&nbsp;&nbsp;→ ${counts[i]} ≤ ${max}, no change`);
+            await sleep(stepDelay);
+          }
+        }
+
+        updateArrayDisplay(numbers.slice(0, size), counts.slice(0, size), -1, id);
+        updateVariables(max, id, true, numbers[id]);
+        
+        // Final result
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = `<strong>🎉 Result:</strong> The most frequent number is <strong style="font-size: 1.5em;">${numbers[id]}</strong> (appears ${max} times)`;
+        resultDiv.style.display = 'block';
+      }
+
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+    </script>
+  </body>
+</html>
