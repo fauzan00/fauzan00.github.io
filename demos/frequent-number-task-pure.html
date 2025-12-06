@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Most Frequent Number - Pure</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      #demo {
+        margin-top: 20px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 4px;
+        font-size: 18px;
+      }
+      pre {
+        background: #f4f4f4;
+        padding: 15px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin-top: 20px;
+      }
+      h2 {
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Most Frequent Number Algorithm (Pure)</h1>
+    <p>Enter comma-separated numbers to find the most frequent one:</p>
+    
+    <input
+      type="text"
+      id="numberInput"
+      value="2,2,3,4,4,4,5,5"
+      placeholder="Enter comma-separated numbers"
+    />
+
+    <button onclick="displayMostFrequent()">Find Most Frequent</button>
+
+    <p id="demo">Result will appear here.</p>
+
+    <h2>Code Implementation</h2>
+    <pre><code>// Entry function to manage input and output
+function displayMostFrequent() {
+  // 1. GET INPUT STRING
+  const inputString = document.getElementById("numberInput").value;
+
+  let numsArray = [];
+  let arrayIndex = 0;
+  let currentNumberString = "";
+
+  // Helper function to process the string built so far
+  function processAndStoreNumber(str) {
+    let processedStr = "";
+    let k = 0;
+
+    // Manual trim (remove spaces)
+    while (str[k] !== undefined) {
+      const char = str[k];
+      if (char !== " ") {
+        processedStr = processedStr + char;
+      }
+      k++;
+    }
+
+    // Validate: check if all characters are digits or minus sign
+    if (processedStr !== "") {
+      let isValid = true;
+      let m = 0;
+      while (processedStr[m] !== undefined) {
+        const c = processedStr[m];
+        if (m === 0 && c === "-") {
+          // Allow minus at start
+        } else if (c < "0" || c > "9") {
+          isValid = false;
+          break;
+        }
+        m++;
+      }
+
+      if (isValid && processedStr !== "-") {
+        const num = parseInt(processedStr);
+        if (!isNaN(num)) {
+          numsArray[arrayIndex] = num;
+          arrayIndex++;
+        }
+      }
+    }
+  }
+
+  // 2. CONVERT STRING TO ARRAY OF NUMBERS (Manual Parsing)
+  let i = 0;
+  while (inputString[i] !== undefined) {
+    const char = inputString[i];
+
+    if (char === ",") {
+      processAndStoreNumber(currentNumberString);
+      currentNumberString = "";
+    } else {
+      currentNumberString = currentNumberString + char;
+    }
+    i++;
+  }
+
+  // Process the last number
+  processAndStoreNumber(currentNumberString);
+
+  // Check if array is empty
+  if (numsArray[0] === undefined) {
+    document.getElementById("demo").innerHTML =
+      "Invalid or empty input. Please enter comma-separated numbers.";
+    return;
+  }
+
+  // 3. CALL CORE LOGIC
+  const result = findMostFrequent(numsArray);
+
+  // 4. DISPLAY RESULT
+  document.getElementById("demo").innerHTML = 
+    `The most frequent number is: <strong>${result}</strong>`;
+}
+
+// Core logic function
+function findMostFrequent(nums) {
+  let numbers = [];
+  let counts = [];
+  let size = 0;
+
+  // Loop 1: Count occurrences of each number
+  let i = 0;
+  while (nums[i] !== undefined) {
+    const currentNum = nums[i];
+    let found = false;
+    let index = -1;
+
+    // Check if currentNum exists in numbers array
+    let j = 0;
+    while (j < size) {
+      if (numbers[j] === currentNum) {
+        found = true;
+        index = j;
+        break;
+      }
+      j++;
+    }
+
+    if (!found) {
+      numbers[size] = currentNum;
+      counts[size] = 1;
+      size++;
+    } else {
+      counts[index]++;
+    }
+    i++;
+  }
+
+  // Loop 2: Find the maximum count
+  let maxCount = -1;
+  let mostFrequentNumber = null;
+
+  let k = 0;
+  while (k < size) {
+    if (counts[k] > maxCount) {
+      maxCount = counts[k];
+      mostFrequentNumber = numbers[k];
+    }
+    k++;
+  }
+
+  return mostFrequentNumber;
+}</code></pre>
+
+    <h2>Full HTML Code</h2>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Most Frequent Number - Pure&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Most Frequent Number Algorithm (Pure)&lt;/h1&gt;
+    &lt;p&gt;Enter comma-separated numbers to find the most frequent one:&lt;/p&gt;
+    
+    &lt;input
+      type="text"
+      id="numberInput"
+      value="2,2,3,4,4,4,5,5"
+      placeholder="Enter comma-separated numbers"
+    /&gt;
+
+    &lt;button onclick="displayMostFrequent()"&gt;Find Most Frequent&lt;/button&gt;
+
+    &lt;p id="demo"&gt;Result will appear here.&lt;/p&gt;
+
+    &lt;script&gt;
+      function displayMostFrequent() {
+        const inputString = document.getElementById("numberInput").value;
+        let numsArray = [];
+        let arrayIndex = 0;
+        let currentNumberString = "";
+
+        function processAndStoreNumber(str) {
+          let processedStr = "";
+          let k = 0;
+          while (str[k] !== undefined) {
+            const char = str[k];
+            if (char !== " ") {
+              processedStr = processedStr + char;
+            }
+            k++;
+          }
+
+          if (processedStr !== "") {
+            let isValid = true;
+            let m = 0;
+            while (processedStr[m] !== undefined) {
+              const c = processedStr[m];
+              if (m === 0 && c === "-") {
+                // Allow minus at start
+              } else if (c < "0" || c > "9") {
+                isValid = false;
+                break;
+              }
+              m++;
+            }
+
+            if (isValid && processedStr !== "-") {
+              const num = parseInt(processedStr);
+              if (!isNaN(num)) {
+                numsArray[arrayIndex] = num;
+                arrayIndex++;
+              }
+            }
+          }
+        }
+
+        let i = 0;
+        while (inputString[i] !== undefined) {
+          const char = inputString[i];
+          if (char === ",") {
+            processAndStoreNumber(currentNumberString);
+            currentNumberString = "";
+          } else {
+            currentNumberString = currentNumberString + char;
+          }
+          i++;
+        }
+        processAndStoreNumber(currentNumberString);
+
+        if (numsArray[0] === undefined) {
+          document.getElementById("demo").innerHTML =
+            "Invalid or empty input. Please enter comma-separated numbers.";
+          return;
+        }
+
+        const result = findMostFrequent(numsArray);
+        document.getElementById("demo").innerHTML = 
+          `The most frequent number is: &lt;strong&gt;${result}&lt;/strong&gt;`;
+      }
+
+      function findMostFrequent(nums) {
+        let numbers = [];
+        let counts = [];
+        let size = 0;
+
+        let i = 0;
+        while (nums[i] !== undefined) {
+          const currentNum = nums[i];
+          let found = false;
+          let index = -1;
+
+          let j = 0;
+          while (j < size) {
+            if (numbers[j] === currentNum) {
+              found = true;
+              index = j;
+              break;
+            }
+            j++;
+          }
+
+          if (!found) {
+            numbers[size] = currentNum;
+            counts[size] = 1;
+            size++;
+          } else {
+            counts[index]++;
+          }
+          i++;
+        }
+
+        let maxCount = -1;
+        let mostFrequentNumber = null;
+
+        let k = 0;
+        while (k < size) {
+          if (counts[k] > maxCount) {
+            maxCount = counts[k];
+            mostFrequentNumber = numbers[k];
+          }
+          k++;
+        }
+
+        return mostFrequentNumber;
+      }
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <script>
+      // Entry function to manage input and output
+      function displayMostFrequent() {
+        // 1. GET INPUT STRING
+        const inputString = document.getElementById("numberInput").value;
+
+        let numsArray = [];
+        let arrayIndex = 0;
+        let currentNumberString = "";
+
+        // Helper function to process the string built so far, handling trimming and conversion
+        function processAndStoreNumber(str) {
+          let processedStr = "";
+          let k = 0;
+
+          // Manual string length check (while char is not undefined)
+          while (str[k] !== undefined) {
+            const char = str[k];
+
+            // Manual check for space (no .trim())
+            if (char !== " ") {
+              // Manual string concatenation (no advanced methods)
+              processedStr = processedStr + char;
+            }
+            k++;
+          }
+
+          // If the processed string is not empty
+          if (processedStr !== "") {
+            // Validate: check if all characters are digits or minus sign
+            let isValid = true;
+            let m = 0;
+            while (processedStr[m] !== undefined) {
+              const c = processedStr[m];
+              if (m === 0 && c === "-") {
+                // Allow minus at start
+              } else if (c < "0" || c > "9") {
+                isValid = false;
+                break;
+              }
+              m++;
+            }
+
+            if (isValid && processedStr !== "-") {
+              // Use parseInt to convert the string to a number
+              const num = parseInt(processedStr);
+
+              if (!isNaN(num)) {
+                numsArray[arrayIndex] = num;
+                arrayIndex++;
+              }
+            }
+          }
+        }
+
+        // 2. CONVERT STRING TO ARRAY OF NUMBERS (Fully Manual Parsing)
+        let i = 0;
+        // Manual string length check (no .length)
+        while (inputString[i] !== undefined) {
+          const char = inputString[i];
+
+          // Check for the comma separator
+          if (char === ",") {
+            // Process the number built up so far
+            processAndStoreNumber(currentNumberString);
+
+            // Reset for the next number
+            currentNumberString = "";
+          } else {
+            // Build the string for the current number
+            currentNumberString = currentNumberString + char;
+          }
+          i++;
+        }
+
+        // Process the last number after the loop finishes
+        processAndStoreNumber(currentNumberString);
+
+        // Manual array check (no .length)
+        if (numsArray[0] === undefined) {
+          document.getElementById("demo").innerHTML =
+            "Invalid or empty input. Please enter comma-separated numbers.";
+          return;
+        }
+
+        // 3. CALL CORE LOGIC
+        const result = findMostFrequent(numsArray);
+
+        // 4. DISPLAY RESULT
+        document.getElementById(
+          "demo"
+        ).innerHTML = `The most frequent number is: <strong>${result}</strong>`;
+      }
+
+      // Core logic function using only basic array and loop structures (now using sentinel value for loop control)
+      function findMostFrequent(nums) {
+        let numbers = [];
+        let counts = [];
+        let size = 0;
+
+        // Loop 1: Count occurrences of each number
+        let i = 0;
+        // Manual array length check (no .length)
+        while (nums[i] !== undefined) {
+          const currentNum = nums[i];
+          let found = false;
+          let index = -1;
+
+          // Inner loop: Check if currentNum exists in the 'numbers' array
+          let j = 0;
+          // Manual size check (using the 'size' counter we maintain)
+          while (j < size) {
+            if (numbers[j] === currentNum) {
+              found = true;
+              index = j;
+              break;
+            }
+            j++;
+          }
+
+          if (!found) {
+            numbers[size] = currentNum;
+            counts[size] = 1;
+            size++;
+          } else {
+            counts[index]++;
+          }
+          i++;
+        }
+
+        // Loop 2: Find the maximum count
+        let maxCount = -1;
+        let mostFrequentNumber = null;
+
+        let k = 0;
+        // Manual size check (using the 'size' counter we maintain)
+        while (k < size) {
+          if (counts[k] > maxCount) {
+            maxCount = counts[k];
+            mostFrequentNumber = numbers[k];
+          }
+          k++;
+        }
+
+        return mostFrequentNumber;
+      }
+    </script>
+  </body>
+</html>
